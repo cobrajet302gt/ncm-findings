@@ -1,0 +1,49 @@
+corpus 7081 files, 112.9 MB
+bpe via repo class: vocab=5328 eos=5294 pad=5295 sample_len=278
+roundtrip head ok=True
+VQVAE, Total parameter count: 34.24M
+VQVAE, Non embedding parameter count: 32.14M
+kmeans init 12 levels done 52s
+step 250 ce=0.789 tok_acc=0.895 chunk_exact=0.031 util=0.896 (67s)
+step 500 ce=0.312 tok_acc=0.959 chunk_exact=0.125 util=0.897 (80s)
+step 750 ce=0.089 tok_acc=0.989 chunk_exact=0.438 util=0.897 (93s)
+step 1000 ce=0.062 tok_acc=0.993 chunk_exact=0.500 util=0.899 (106s)
+step 1250 ce=0.024 tok_acc=0.998 chunk_exact=0.875 util=0.902 (119s)
+step 1500 ce=0.046 tok_acc=0.995 chunk_exact=0.781 util=0.902 (133s)
+step 1750 ce=0.013 tok_acc=0.999 chunk_exact=0.844 util=0.903 (146s)
+step 2000 ce=0.011 tok_acc=0.999 chunk_exact=0.938 util=0.903 (159s)
+step 2250 ce=0.021 tok_acc=0.997 chunk_exact=0.875 util=0.903 (173s)
+step 2500 ce=0.024 tok_acc=0.996 chunk_exact=0.875 util=0.903 (186s)
+step 2750 ce=0.008 tok_acc=0.999 chunk_exact=0.875 util=0.903 (199s)
+step 3000 ce=0.007 tok_acc=0.999 chunk_exact=0.844 util=0.903 (212s)
+step 3250 ce=0.016 tok_acc=0.999 chunk_exact=0.875 util=0.903 (225s)
+step 3500 ce=0.012 tok_acc=0.998 chunk_exact=0.906 util=0.905 (238s)
+step 3750 ce=0.002 tok_acc=1.000 chunk_exact=1.000 util=0.906 (251s)
+step 4000 ce=0.004 tok_acc=0.999 chunk_exact=0.906 util=0.908 (264s)
+step 4250 ce=0.004 tok_acc=0.999 chunk_exact=0.906 util=0.913 (278s)
+step 4500 ce=0.011 tok_acc=0.998 chunk_exact=0.844 util=0.916 (291s)
+DONE 292s
+=== CKPT AUDIT (held-out, CPU) ===
+tokenizer_1000 W64 HELDOUT {"snippets": 94, "blocks": 216, "token_acc": 0.9905, "err_by_location": {"comment": 0, "string": 75, "punct": 4, "ident": 128}, "block_exact": 0.6614, "window": 64, "snippet_text_exact": 0.2872, "secs": 5}
+tokenizer_1000 W128 HELDOUT {"snippets": 94, "blocks": 216, "token_acc": 0.9905, "err_by_location": {"comment": 0, "string": 75, "punct": 4, "ident": 128}, "block_exact": 0.5305, "window": 128, "snippet_text_exact": 0.2872, "secs": 5}
+tokenizer_1500 W64 HELDOUT {"snippets": 94, "blocks": 216, "token_acc": 0.9971, "err_by_location": {"comment": 0, "string": 27, "punct": 0, "ident": 36}, "block_exact": 0.8845, "window": 64, "snippet_text_exact": 0.6596, "secs": 6}
+tokenizer_1500 W128 HELDOUT {"snippets": 94, "blocks": 216, "token_acc": 0.9971, "err_by_location": {"comment": 0, "string": 27, "punct": 0, "ident": 36}, "block_exact": 0.8169, "window": 128, "snippet_text_exact": 0.6596, "secs": 5}
+tokenizer_2000 W64 HELDOUT {"snippets": 94, "blocks": 216, "token_acc": 0.9975, "err_by_location": {"comment": 0, "string": 17, "punct": 0, "ident": 37}, "block_exact": 0.8924, "window": 64, "snippet_text_exact": 0.6915, "secs": 5}
+tokenizer_2000 W128 HELDOUT {"snippets": 94, "blocks": 216, "token_acc": 0.9975, "err_by_location": {"comment": 0, "string": 17, "punct": 0, "ident": 37}, "block_exact": 0.8169, "window": 128, "snippet_text_exact": 0.6915, "secs": 6}
+tokenizer_2500 W64 HELDOUT {"snippets": 94, "blocks": 216, "token_acc": 0.9994, "err_by_location": {"comment": 0, "string": 8, "punct": 0, "ident": 6}, "block_exact": 0.9659, "window": 64, "snippet_text_exact": 0.883, "secs": 5}
+tokenizer_2500 W128 HELDOUT {"snippets": 94, "blocks": 216, "token_acc": 0.9994, "err_by_location": {"comment": 0, "string": 8, "punct": 0, "ident": 6}, "block_exact": 0.939, "window": 128, "snippet_text_exact": 0.883, "secs": 5}
+tokenizer_3000 W64 HELDOUT {"snippets": 94, "blocks": 216, "token_acc": 0.998, "err_by_location": {"comment": 0, "string": 24, "punct": 0, "ident": 20}, "block_exact": 0.9396, "window": 64, "snippet_text_exact": 0.8191, "secs": 5}
+tokenizer_3000 W128 HELDOUT {"snippets": 94, "blocks": 216, "token_acc": 0.998, "err_by_location": {"comment": 0, "string": 24, "punct": 0, "ident": 20}, "block_exact": 0.8967, "window": 128, "snippet_text_exact": 0.8191, "secs": 5}
+tokenizer_3500 W64 HELDOUT {"snippets": 94, "blocks": 216, "token_acc": 0.9981, "err_by_location": {"comment": 0, "string": 23, "punct": 1, "ident": 18}, "block_exact": 0.9318, "window": 64, "snippet_text_exact": 0.8298, "secs": 5}
+tokenizer_3500 W128 HELDOUT {"snippets": 94, "blocks": 216, "token_acc": 0.9981, "err_by_location": {"comment": 0, "string": 23, "punct": 1, "ident": 18}, "block_exact": 0.8967, "window": 128, "snippet_text_exact": 0.8298, "secs": 5}
+tokenizer_4000 W64 HELDOUT {"snippets": 94, "blocks": 216, "token_acc": 0.9978, "err_by_location": {"comment": 0, "string": 26, "punct": 2, "ident": 19}, "block_exact": 0.9239, "window": 64, "snippet_text_exact": 0.7766, "secs": 5}
+tokenizer_4000 W128 HELDOUT {"snippets": 94, "blocks": 216, "token_acc": 0.9978, "err_by_location": {"comment": 0, "string": 26, "punct": 2, "ident": 19}, "block_exact": 0.8732, "window": 128, "snippet_text_exact": 0.7766, "secs": 5}
+tokenizer_4500 W64 HELDOUT {"snippets": 94, "blocks": 216, "token_acc": 0.9975, "err_by_location": {"comment": 0, "string": 24, "punct": 8, "ident": 23}, "block_exact": 0.8976, "window": 64, "snippet_text_exact": 0.7021, "secs": 6}
+tokenizer_4500 W128 HELDOUT {"snippets": 94, "blocks": 216, "token_acc": 0.9975, "err_by_location": {"comment": 0, "string": 24, "punct": 8, "ident": 23}, "block_exact": 0.8263, "window": 128, "snippet_text_exact": 0.7021, "secs": 6}
+tokenizer_500 W64 HELDOUT {"snippets": 94, "blocks": 216, "token_acc": 0.9468, "err_by_location": {"comment": 0, "string": 355, "punct": 36, "ident": 764}, "block_exact": 0.1444, "window": 64, "snippet_text_exact": 0.0213, "secs": 4}
+tokenizer_500 W128 HELDOUT {"snippets": 94, "blocks": 216, "token_acc": 0.9468, "err_by_location": {"comment": 0, "string": 355, "punct": 36, "ident": 764}, "block_exact": 0.0892, "window": 128, "snippet_text_exact": 0.0213, "secs": 4}
+tokenizer_last W64 HELDOUT {"snippets": 94, "blocks": 216, "token_acc": 0.9975, "err_by_location": {"comment": 0, "string": 24, "punct": 8, "ident": 23}, "block_exact": 0.8976, "window": 64, "snippet_text_exact": 0.7021, "secs": 5}
+tokenizer_last W128 HELDOUT {"snippets": 94, "blocks": 216, "token_acc": 0.9975, "err_by_location": {"comment": 0, "string": 24, "punct": 8, "ident": 23}, "block_exact": 0.8263, "window": 128, "snippet_text_exact": 0.7021, "secs": 6}
+tokenizer_final W64 HELDOUT {"snippets": 94, "blocks": 216, "token_acc": 0.9975, "err_by_location": {"comment": 0, "string": 24, "punct": 8, "ident": 23}, "block_exact": 0.8976, "window": 64, "snippet_text_exact": 0.7021, "secs": 5}
+tokenizer_final W128 HELDOUT {"snippets": 94, "blocks": 216, "token_acc": 0.9975, "err_by_location": {"comment": 0, "string": 24, "punct": 8, "ident": 23}, "block_exact": 0.8263, "window": 128, "snippet_text_exact": 0.7021, "secs": 5}
+AUDIT-DONE
