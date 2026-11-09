@@ -1,0 +1,15 @@
+{
+ "snippets": 94,
+ "blocks": 216,
+ "token_acc": 0.9951,
+ "err_by_location": {
+  "comment": 1,
+  "string": 34,
+  "punct": 42,
+  "ident": 29
+ },
+ "block_exact": 0.662,
+ "window": 128,
+ "snippet_text_exact": 0.4681,
+ "secs": 4
+}

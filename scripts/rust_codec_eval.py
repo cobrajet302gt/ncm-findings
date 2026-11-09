@@ -10,10 +10,12 @@ from tokenization.bpe_tokenizer import BPETokenizer
 from omegaconf import OmegaConf
 
 LAB = "/home/cobrajet/ncm-lab"
-CK = f"{LAB}/artifacts/rustcodec"
+CK = os.environ.get("CK", f"{LAB}/artifacts/rustcodec")
+CK_NAME = os.environ.get("CK_NAME", "tokenizer.pt")
 DEV = os.environ.get("DEV", "cuda")
 BATCH = int(os.environ.get("BATCH", "64"))
-SEG = 128
+MS = int(os.environ.get("METRIC_SEG", "128"))  # measurement window for block-exact; 64 = apples-to-apples w/ NCM-zero
+SEG = 128  # model context — architecture, not a knob
 torch.manual_seed(0)
 
 class Cfg:
@@ -32,7 +34,7 @@ vqvae = VQVAE(in_vocab_size=VOCAB, context_length=SEG, embed_dim=tvq["embed_dim"
               compression_factor=tvq["compression_factor"], dropout=0.0,
               pre_quant_groupnorm=tvq["pre_quant_groupnorm"], use_qk_norm=tvq["use_qk_norm"],
               pre_quant_dropout=0.0)
-sd = torch.load(f"{CK}/tokenizer.pt", map_location="cpu", weights_only=False)
+sd = torch.load(f"{CK}/{CK_NAME}", map_location="cpu", weights_only=False)
 vqvae.load_state_dict(sd["model"], strict=True)
 vqvae = vqvae.eval().to(DEV)
 
@@ -50,7 +52,7 @@ print(f"held-out: {len(files)} strata files, {len(snips)} snippets", flush=True)
 def blocks(ids):
     return [ids[i:i + SEG] for i in range(0, len(ids), SEG)]
 
-tot_b = tok_ok = chunk_ok = tot_tok = 0
+tot_b = tok_ok = chunk_ok = tot_tok = wtot = 0
 tot_s = snip_exact = 0
 err_loc = {"comment": 0, "string": 0, "punct": 0, "ident": 0}
 worst = []
@@ -98,7 +100,13 @@ with torch.no_grad():
                     pass
             tok_ok += sum(int(a == b) for a, b in zip(pred[k, :ln].tolist(), flat[k][:ln]))
             tot_tok += ln
-            chunk_ok += int(pred[k, :ln].tolist() == flat[k][:ln])
+            pl, fl = pred[k, :ln].tolist(), flat[k][:ln]
+            for w0 in range(0, ln, MS):
+                le = min(MS, ln - w0)
+                if le < 8:
+                    continue
+                wtot += 1
+                chunk_ok += int(pl[w0:w0 + le] == fl[w0:w0 + le])
             tot_b += 1
         for si, sn in enumerate(batch_sn):
             tot_s += 1
@@ -108,9 +116,9 @@ with torch.no_grad():
                 worst.append((sn.replace("\n", " ")[:80], recs[si].replace("\n", " ")[:80]))
 res = dict(snippets=tot_s, blocks=tot_b, token_acc=round(tok_ok / max(1, tot_tok), 4),
            err_by_location=err_loc,
-           block_exact=round(chunk_ok / max(1, tot_b), 4),
+           block_exact=round(chunk_ok / max(1, wtot), 4), window=MS,
            snippet_text_exact=round(snip_exact / max(1, tot_s), 4), secs=round(time.time() - t0))
 print("HELDOUT", json.dumps(res), flush=True)
 for a, b in worst:
     print("WORST:", a, "=>", b, flush=True)
-json.dump(res, open(f"{LAB}/eval/rust-codec-heldout.json", "w"), indent=1)
+json.dump(res, open(f"{LAB}/eval/rust-codec-heldout-{os.path.basename(CK)}-{CK_NAME.replace('.pt','')}-w{MS}.json", "w"), indent=1)
