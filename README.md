@@ -42,3 +42,6 @@ xsum n=128, 20 candidates @ temp 1.0, reference-free selector = gpt-oss-20b (:80
 - Greedy eval is batch-invariant, so shrinking `--bs` to fit small GPUs never invalidates accuracy (xsum bs4, sudoku bs24 on 1.9 GB).
 
 All scripts (`scripts/`: `train_gen.py`, `edit_pilot.py`, `audit_rust.py`, `a4_mbr.py`, `a4b_mbr.py`, `probe_a.py`, `eval_gen.py`, `setup.sh`) and result JSONs (`eval/`) for every number above are in this repo. We're happy to file these as separate issues upstream (editing metrics, VRAM recipe, #16 relevance, level-0 docs) if the HazyResearch maintainers prefer.
+
+## Follow-up work in flight (2026-11-08, late)
+Stage-1 **Rust codec training** started: `scripts/train_codec.py` is the missing upstream driver loop (BPE-8192 fit on Rust → repo byte-tuple pickles → k-means init via `quant.kmeans_init_level` → CE+VQ training, EMA codebooks). Smoke on 3.2 MB: 300 steps → 95.4% token accuracy, 91.7% codebook utilization, inside the shared GPU slice. Full run on ~100 MB corpus (top crates.io crates, `scripts/fetch_rust_corpus.py`) reports chunk-exactness vs the NCM-zero Python reference (99.72%/88.1%) here when done.
