@@ -43,5 +43,14 @@ xsum n=128, 20 candidates @ temp 1.0, reference-free selector = gpt-oss-20b (:80
 
 All scripts (`scripts/`: `train_gen.py`, `edit_pilot.py`, `audit_rust.py`, `a4_mbr.py`, `a4b_mbr.py`, `probe_a.py`, `eval_gen.py`, `setup.sh`) and result JSONs (`eval/`) for every number above are in this repo. We're happy to file these as separate issues upstream (editing metrics, VRAM recipe, #16 relevance, level-0 docs) if the HazyResearch maintainers prefer.
 
-## Follow-up work in flight (2026-11-08, late)
-Stage-1 **Rust codec training** started: `scripts/train_codec.py` is the missing upstream driver loop (BPE-8192 fit on Rust → repo byte-tuple pickles → k-means init via `quant.kmeans_init_level` → CE+VQ training, EMA codebooks). Smoke on 3.2 MB: 300 steps → 95.4% token accuracy, 91.7% codebook utilization, inside the shared GPU slice. Full run on ~100 MB corpus (top crates.io crates, `scripts/fetch_rust_corpus.py`) reports chunk-exactness vs the NCM-zero Python reference (99.72%/88.1%) here when done.
+## STAGE-1 RUST CODEC — VERDICT (2026-11-09): codec gate PASSED, with a measured error anatomy
+Trained the first multiscale VQ codec on Rust (`scripts/train_codec.py`, driver loop upstream lacked): 220 top crates / 113 MB / 7,081 files (fetcher: `scripts/fetch_rust_corpus.py`), BPE-8192 fit on Rust, 20k steps, bs32x2 accumulation, **28 minutes total, 1,127 MiB peak, live next to a serving LLM** (curve: `eval/rustcodec-full-curve.json`).
+**Held-out on our own app's Rust (zero corpus overlap, `scripts/rust_codec_eval.py`, `eval/rust-codec-heldout.json`):**
+- token accuracy **99.51%** (vs 99.72% published for Python by NCM-zero — parity on a harder, denser language)
+- 128-token block exact **66.7%**; text-exact snippet rate 46.8%
+- codebook utilization **100%**, zero dead codes (issue #16 extinct at this scale)
+**Error anatomy (106 errors, classified by location) — the interesting part:**
+- 40% punctuation, 27% identifiers — *compiler-visible*: rustc catches every one, and compiler-in-the-loop repair is the designed recovery path
+- **32% inside string literals** — these *compile fine and change behavior*; an NCM coding agent needs tests/`assert` gates, not just `cargo check`
+- 1% comments — free
+Verdict: the Rust lane is green under its pre-registered gate. The prose-codec failure (0/120 exact) was cross-domain codec reuse, not NCM — a domain-fit codec restores usable exactness, and the residual error profile tells us exactly what the verifier must cover. Stage-2 (generator on Rust codes, level-0 prior derived from the corpus) starts on this artifact now.
