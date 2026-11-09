@@ -1,0 +1,41 @@
+{
+ "m1": {
+  "chars": 41963,
+  "vocab": 8192,
+  "tokens_rust_bpe": 12575,
+  "tokens_prose_bpe": 19559,
+  "chars_per_tok_rust": 3.34,
+  "chars_per_tok_prose": 2.15,
+  "inflation": 1.56
+ },
+ "frag": {
+  "'static": 3.0,
+  "'a ": 3.0,
+  "::<": 1.0,
+  "macro_rules!": 4.0,
+  "#[derive": 2.0,
+  "impl Iterator": 2.0,
+  "where": 1.0,
+  "unsafe fn": 0.0,
+  "async move": 0.0,
+  "dyn ": 2.0,
+  "-> Box<": 0.0,
+  "<T: ": 4.0,
+  "Self::": 2.0,
+  "loop {": 2.0,
+  "match ": 2.0
+ },
+ "m3": {
+  "snippets": 120,
+  "full_exact": 0.0,
+  "any_level_exact": 0.0,
+  "exact_at_level_hist": {},
+  "median_exact_level": null,
+  "secs": 20
+ },
+ "corpus": {
+  "files": 154,
+  "train_kib": 2290,
+  "snippets": 120
+ }
+}

@@ -1,6 +1,6 @@
 # Independent NCM reproduction on a consumer GPU — plus first-ever NCM knowledge editing, 1.1 GB training, a Rust codec audit, and priced MBR
 
-We reproduced your checkpoints on an RTX 5080 (shared slice, a 20B judge serving beside us the entire time — nothing was parked), then extended the state of the art on four fronts. (Conscious crowding noted 2026-11-08: Kmollo/NCM-zero independently fixed #16 and trained a near-perfect PYTHON codec — 99.72% token / 88.1% chunk-exact — and reached a pre-registered STOP verdict for small-scale NCM code generation; our Rust audit confirms the codec half of that story from a different direction, and our MBR result quantifies exactly the lever their study lacks: selection.) All numbers below are our measurements; repro scripts are named inline.
+We reproduced the official HazyResearch NCM checkpoints on an RTX 5080 (shared slice, a 20B judge serving beside us the entire time — nothing was parked), then extended the state of the art on four fronts. (Conscious crowding noted 2026-11-08: Kmollo/NCM-zero independently fixed #16 and trained a near-perfect PYTHON codec — 99.72% token / 88.1% chunk-exact — and reached a pre-registered STOP verdict for small-scale NCM code generation; our Rust audit confirms the codec half of that story from a different direction, and our MBR result quantifies exactly the lever their study lacks: selection.) All numbers below are our measurements; repro scripts are named inline.
 
 **Hardware:** single RTX 5080 (16 GB), training/eval confined to a ~1.9 GB side-slice with a live llama-server (gpt-oss-20b) on the same card. torch 2.15+cu132 (sm_120).
 
@@ -41,4 +41,4 @@ xsum n=128, 20 candidates @ temp 1.0, reference-free selector = gpt-oss-20b (:80
 - `generate()` prefix tensors must be 2-D `(B,P)`; HFTokenizer wrapper `.encode()` takes no HF kwargs; `decode_multiscales` returns batch-nested lists; checkpoints are pickles (`weights_only=False`).
 - Greedy eval is batch-invariant, so shrinking `--bs` to fit small GPUs never invalidates accuracy (xsum bs4, sudoku bs24 on 1.9 GB).
 
-Scripts, logs, and JSON for every number above available on request (we can push a findings repo with `train_gen.py`, `edit_pilot.py`, `audit_rust.py`, `a4_mbr.py`/`a4b_mbr.py`, `probe_a.py` and all result JSONs). Happy to file these as separate issues (editing metrics, VRAM recipe, #16 relevance, level-0 docs) if maintainers prefer.
+All scripts (`scripts/`: `train_gen.py`, `edit_pilot.py`, `audit_rust.py`, `a4_mbr.py`, `a4b_mbr.py`, `probe_a.py`, `eval_gen.py`, `setup.sh`) and result JSONs (`eval/`) for every number above are in this repo. We're happy to file these as separate issues upstream (editing metrics, VRAM recipe, #16 relevance, level-0 docs) if the HazyResearch maintainers prefer.
