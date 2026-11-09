@@ -1,0 +1,2 @@
+Hardware: single RTX 5080 (16 GB); all training/eval confined to a ~1.9 GB side-slice on one machine that also serves a live gpt-oss-20b judge. torch 2.15+cu128/132. Results produced 2026-11-08.
+Scripts are stage-2 trainers/audits written against the MIT HazyResearch/ncm architecture; official checkpoints come from hazyresearch/ncm-checkpoints (see scripts/setup.sh) and are not included.

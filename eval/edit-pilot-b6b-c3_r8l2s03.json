@@ -1,0 +1,54 @@
+{
+ "audit": {
+  "built": 68,
+  "codec_ok": 67
+ },
+ "pre": {
+  "eff": {
+   "pref_delta": -0.789851255218188,
+   "top1_B": 0.23194562446898895
+  },
+  "gen": {
+   "pref_delta": -0.3287814974784851,
+   "top1_B": 0.232
+  },
+  "drift": 0.0,
+  "samples": {
+   "n": 32,
+   "B_mentions": 0,
+   "A_mentions": 32
+  }
+ },
+ "ctrl": {
+  "eff": {
+   "pref_delta": -0.789851255218188,
+   "top1_B": 0.23194562446898895
+  },
+  "gen": {
+   "pref_delta": -0.3287814974784851,
+   "top1_B": 0.232
+  },
+  "drift": 0.0,
+  "samples": {
+   "n": 32,
+   "B_mentions": 0,
+   "A_mentions": 32
+  }
+ },
+ "lora": {
+  "eff": {
+   "pref_delta": 0.10872519016265869,
+   "top1_B": 0.2803738317757009
+  },
+  "gen": {
+   "pref_delta": -0.15110564231872559,
+   "top1_B": 0.256
+  },
+  "drift": 0.03384377647529948,
+  "samples": {
+   "n": 32,
+   "B_mentions": 0,
+   "A_mentions": 32
+  }
+ }
+}

@@ -1,0 +1,78 @@
+{
+ "n": 512,
+ "K": 9,
+ "A1_codec_ceiling": {
+  "exact": 0.6465,
+  "rougeL": 0.9844,
+  "rouge1": 0.9375
+ },
+ "A2_level_curve": [
+  {
+   "exact": 0.0,
+   "rougeL": 0.0355,
+   "rouge1": 0.0192
+  },
+  {
+   "exact": 0.0,
+   "rougeL": 0.0978,
+   "rouge1": 0.0553
+  },
+  {
+   "exact": 0.0,
+   "rougeL": 0.1809,
+   "rouge1": 0.1075
+  },
+  {
+   "exact": 0.0,
+   "rougeL": 0.2819,
+   "rouge1": 0.1823
+  },
+  {
+   "exact": 0.0,
+   "rougeL": 0.3891,
+   "rouge1": 0.2743
+  },
+  {
+   "exact": 0.0,
+   "rougeL": 0.5037,
+   "rouge1": 0.3819
+  },
+  {
+   "exact": 0.0,
+   "rougeL": 0.6113,
+   "rouge1": 0.5001
+  },
+  {
+   "exact": 0.0,
+   "rougeL": 0.6477,
+   "rouge1": 0.5816
+  },
+  {
+   "exact": 0.6465,
+   "rougeL": 0.9844,
+   "rouge1": 0.9375
+  }
+ ],
+ "A3_corruption": {
+  "0.1": {
+   "exact": 0.0,
+   "rougeL": 0.75,
+   "rouge1": 0.8423
+  },
+  "0.3": {
+   "exact": 0.0,
+   "rougeL": 0.4895,
+   "rouge1": 0.6466
+  },
+  "0.5": {
+   "exact": 0.0,
+   "rougeL": 0.3064,
+   "rouge1": 0.4263
+  },
+  "0.7": {
+   "exact": 0.0,
+   "rougeL": 0.1668,
+   "rouge1": 0.2513
+  }
+ }
+}
