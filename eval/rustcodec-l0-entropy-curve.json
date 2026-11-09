@@ -1,0 +1,68 @@
+[
+ {
+  "ck": "tokenizer_last.pt",
+  "nonzero": 214,
+  "eff": 70.9,
+  "H_bits": 7.07
+ },
+ {
+  "ck": "tokenizer.pt",
+  "nonzero": 214,
+  "eff": 70.9,
+  "H_bits": 7.07
+ },
+ {
+  "ck": "tokenizer_500.pt",
+  "nonzero": 3,
+  "eff": 2.0,
+  "H_bits": 1.06
+ },
+ {
+  "ck": "tokenizer_1000.pt",
+  "nonzero": 3,
+  "eff": 2.9,
+  "H_bits": 1.57
+ },
+ {
+  "ck": "tokenizer_1500.pt",
+  "nonzero": 5,
+  "eff": 4.1,
+  "H_bits": 2.13
+ },
+ {
+  "ck": "tokenizer_2000.pt",
+  "nonzero": 13,
+  "eff": 3.2,
+  "H_bits": 2.23
+ },
+ {
+  "ck": "tokenizer_2500.pt",
+  "nonzero": 10,
+  "eff": 6.4,
+  "H_bits": 2.83
+ },
+ {
+  "ck": "tokenizer_3000.pt",
+  "nonzero": 22,
+  "eff": 15.5,
+  "H_bits": 4.15
+ },
+ {
+  "ck": "tokenizer_3500.pt",
+  "nonzero": 98,
+  "eff": 54.1,
+  "H_bits": 6.13
+ },
+ {
+  "ck": "tokenizer_4000.pt",
+  "nonzero": 104,
+  "eff": 52.7,
+  "H_bits": 6.16
+ },
+ {
+  "ck": "tokenizer_4500.pt",
+  "nonzero": 214,
+  "eff": 70.9,
+  "H_bits": 7.07
+ }
+]
